@@ -1,0 +1,17 @@
+[package]
+name = "lz_stream_io"
+version = "0.1.0"
+authors = ["Luke Horsley <luke.horsley@offset1337.co.uk>"]
+description = "AsyncRead and AsyncWrite implementations for Streams and Sinks respectively"
+repository = "https://github.com/lukazoid/lz_stream_io"
+keywords = ["stream", "sink", "io", "read", "write"]
+categories = ["asynchronous", "concurrency"]
+license = "MIT"
+
+[badges]
+travis-ci = { repository = "Lukazoid/lz_stream_io" }
+
+[dependencies]
+bytes = "0.4.6"
+futures = "0.1.18"
+tokio-io = "0.1.4"
