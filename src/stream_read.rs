@@ -47,12 +47,8 @@ where
 {
     fn fill_buf(&mut self) -> IoResult<&[u8]> {
         if self.buf.is_empty() {
-            match self.stream.poll()? {
-                Async::Ready(Some(item)) => {
-                    self.buf.extend_from_slice(item.as_ref());
-                }
-                Async::Ready(None) => {}
-                Async::NotReady => return Err(IoErrorKind::WouldBlock.into()),
+            if let Some(item) = async_io!(self.stream.poll()?) {
+                self.buf.extend_from_slice(item.as_ref());
             }
         }
         Ok(&self.buf[..])

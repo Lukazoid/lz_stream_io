@@ -36,10 +36,9 @@ where
     }
 
     fn flush(&mut self) -> IoResult<()> {
-        match self.sink.poll_complete()? {
-            Async::NotReady => Err(IoErrorKind::WouldBlock.into()),
-            Async::Ready(_) => Ok(()),
-        }
+        async_io!(self.sink.poll_complete()?);
+
+        Ok(())
     }
 }
 

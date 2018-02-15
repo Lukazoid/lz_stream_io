@@ -44,6 +44,13 @@ extern crate bytes;
 extern crate futures;
 extern crate tokio_io;
 
+macro_rules! async_io {
+    ($e: expr) => (match $e {
+        ::futures::Async::Ready(result) => result,
+        ::futures::Async::NotReady => return Err(::std::io::ErrorKind::WouldBlock.into()),
+    })
+}
+
 mod stream_read;
 pub use stream_read::StreamRead;
 
